@@ -10,4 +10,5 @@ sudo make dkms_install
 echo "Driver do Adaptador Wi-Fi USB configurado com sucesso!"
 read -p "Por favor, conecte o adaptador Wi-Fi USB e pressione Enter para continuar..."
 
+sleep 15
 nmcli dev wifi connect DRONE_FLAMEJANTE_5G password Boradronezada ifname wlx788cb533651e

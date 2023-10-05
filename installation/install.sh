@@ -8,4 +8,6 @@
 
 ./03_instalar_ros2.sh
 
+./04_instalar_projeto.sh sequential
+
 echo "Todas as configurações foram concluídas com sucesso!"
