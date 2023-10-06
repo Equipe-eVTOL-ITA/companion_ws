@@ -45,3 +45,5 @@ ros2 launch camera_launch rpi.launch.py &
 RPI_PID=$!
 sleep 1
 
+trap kill_background_processes SIGNINT
+wait
