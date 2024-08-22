@@ -1,10 +1,8 @@
 # Workspace da FRTL 2024
 
-Vamos fazer o setup dos pacotes necessários para enviar comandos de offboard control para o drone no Gazebo utilizando PX4-Autopilot, ROS 2 e o protocolo uXRCE-DDS.
+Vamos fazer o setup dos pacotes necessários para enviar comandos de offboard control para o drone no Gazebo utilizando ROS 2 e o protocolo uXRCE-DDS.
 
 ### Explicando o que é cada pacote
-
-- **PX4-Autopilot**: é o mesmo firmware de PX4 1.14 que roda na PixHawk. Por default, esse pacote também baixa o Gazebo.
 
 - **ROS 2**: Sistema operacional que facilita a comunicação entre diferentes partes do drone, tanto entre componentes físicos como de software.
 
@@ -16,30 +14,12 @@ Vamos fazer o setup dos pacotes necessários para enviar comandos de offboard co
 
 - **frtl_2024**: contém a classe Drone (implementa funções que enviam px4_msgs) e também as máquinas de estados para resolver as fases.
 
-- **simulation**: Repositório com modelos de mundo e configurações do drone para a simulação.
-
-### Explicando a estrutura do workspace
-
-```
-home/
-├── PX4-Autopilot
-├── MicroXRCE-Agent
-├── frtl_2024_ws/
-    ├── src/
-        ├── px4_msgs
-        ├── px4_ros_com
-        ├── frtl_2024
-        ├── simulation
-    ├── tasks/
-        ├── build_ws.sh
-        ├── simulate.sh
-```
 
 ## Pré-requisitos
 
 - **Sistema Operacional**: Ubuntu 22.04
 - **Dependências**:
-  - Github CLI (Configure aqui)
+  - Github CLI (Configure na próxima seção)
   - CMake
   - Python 3
   - Pip
@@ -71,28 +51,7 @@ sudo apt install -y git cmake python3-colcon-common-extensions
 pip install --user -U empy==3.3.4 pyros-genmsg setuptools==59.6.0
 ```
 
-### 2. Instalar QGroundControl
-
-1. Rode no terminal:
-```bash
-sudo usermod -a -G dialout $USER
-sudo apt-get remove modemmanager -y
-sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
-sudo apt install libfuse2 -y
-sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor0 -y
-```
-
-2. **Faça logout e login** para valer as mudanças.
-
-3.  Download o [QGroundControl.AppImage](https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage)
-
-4. Rode no terminal, na pasta em que está o download (`cd ~/Downloads`):
-    ```bash
-    chmod +x ./QGroundControl.AppImage
-    ./QGroundControl.AppImage
-    ```
-
-### 3. Instalar ROS 2 Humble
+### 2. Instalar ROS 2 Humble
 
 ```sh
 sudo apt update && sudo apt install locales
@@ -110,7 +69,7 @@ sudo apt install ros-dev-tools
 source /opt/ros/humble/setup.bash && echo "source /opt/ros/humble/setup.bash" >> .bashrc
 ```
 
-### 4. Baixar MicroXRCE-Agent
+### 3. Baixar MicroXRCE-Agent
 
 ```sh
 cd ~
@@ -124,23 +83,13 @@ sudo make install
 sudo ldconfig /usr/local/lib/
 ```
 
-### 5. Baixar PX4-Autopilot (com Gazebo)
+### 4. Setup do companion_ws
 
-```sh
-cd ~
-git clone https://github.com/PX4/PX4-Autopilot.git --recursive
-bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
-cd PX4-Autopilot/
-make px4_sitl
-```
-
-### 6. Setup do frtl_2024_ws
-
-- Primeiramente, clone o repositório `frtl_2024_ws`:
+- Primeiramente, clone o repositório `companion_ws`:
 
   ```bash
   cd ~
-  git clone https://github.com/Equipe-eVTOL-ITA/frtl_2024_ws.git
+  git clone https://github.com/Equipe-eVTOL-ITA/companion_ws.git
   ```
 
 - Abra esse repositório no VS Code.
@@ -152,20 +101,13 @@ O script `setup.sh` fará o download dos repositórios necessários, além de bu
 
 ## Teste para ver se está tudo ok
 
-- **Primeiro terminal**: rode a simulação PX4 com Gazebo
-  
-  ```bash
-  export GZ_SIM_RESOURCE_PATH=/home/vinicius/PX4-Autopilot/Tools/simulation/gz
-  cd ~/PX4-Autopilot && make px4_sitl gz_x500
-  ```
-
-- **Segundo terminal**: inicie o agente uXRCE-DDS
+- **Primeiro terminal**: inicie o agente uXRCE-DDS
   
   ```bash
   MicroXRCEAgent udp4 -p 8888
   ```
 
-- **Terceiro terminal**: rode o pacote de ROS 2 que você quiser. Um exemplo:
+- **Segundo terminal**: rode o pacote de ROS 2 que você quiser. Um exemplo:
   
   ```bash
   source /opt/ros/humble/setup.bash
@@ -173,10 +115,9 @@ O script `setup.sh` fará o download dos repositórios necessários, além de bu
   ros2 run px4_ros_com offboard_control
   ```
 
-## Rodando a simulação
+## Rodando um pacote ROS 
 
 - Execute a task Agent
-- Execute a task Simulate
 - Abra um terminal: 
   ```bash
   #Sempre importar o ros2 para o terminal
