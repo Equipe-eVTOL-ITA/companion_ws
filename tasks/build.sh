@@ -2,26 +2,25 @@
 set -e
 
 if [ $# -ne 1 ]; then
-    echo "Usage: $0 <targets> <parallel/sequential>"
+    echo "Usage: $0 <targets>"
     exit 1
 fi
 
-# Check if the argument is equal to "a"
 if [ $1 = all ]
 then
     BUILD_PATH=""
 elif [ $1 = dependencies ]
 then
-    BUILD_PATH="--paths src/json/ src/px4_msgs/* src/px4_ros_com/*"
+    BUILD_PATH="--paths src/json/ src/px4_msgs/* src/px4_ros_com/* fsm/*"
+elif [ $1 = custom_msgs ]
+then
+    BUILD_PATH="--paths src/custom_msgs"
+elif [ $1 = gesture_packages ]
+then
+    BUILD_PATH="--paths src/camera_publisher src/gesture_classifier"
 elif [ $1 = frtl_2024 ]
 then
     BUILD_PATH="--paths src/frtl_2024/*"
-elif [ $1 = fsm ]
-then
-    BUILD_PATH="--paths src/fsm/*"
-elif [ $1 = simulation ]
-then
-    BUILD_PATH="--paths src/simulation/*"
 elif [ $1 = cv_utils ]
 then
     BUILD_PATH="--paths src/frtl_2024/frtl_2024_cv_utils"    
@@ -38,7 +37,6 @@ elif [ $1 = fase4 ]
 then
     BUILD_PATH="--paths src/frtl_2024/frtl_2024_fase4"
 else
-    echo "Possible options: all, dependencies, frtl_2024, fsm, simulation"
     exit 1
 fi
 

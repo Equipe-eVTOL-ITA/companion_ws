@@ -14,6 +14,14 @@ Vamos fazer o setup dos pacotes necessários para enviar comandos de offboard co
 
 - **frtl_2024**: contém a classe Drone (implementa funções que enviam px4_msgs) e também as máquinas de estados para resolver as fases.
 
+- **camera_publisher**: pacote simples que publica ImageCompressed a partir do feed de vídeo do dispositivo.
+
+- **gesture_classifier**: rede neural que recebe imagens e publicas os gestos de mão classificados.
+
+- **custom_msgs**: conjunto de mensagens personalizadas de ROS 2.
+
+- **gesture_control**: pacote _outdated_ de controle PX4 por gestos. Substituído por frtl_2024_fase4.
+
 
 ## Pré-requisitos
 
@@ -127,7 +135,7 @@ O script `setup.sh` fará o download dos repositórios necessários, além de bu
   ros2 run <nome_do_pacote> <nome_do_executavel>
   ```
   
-  - Ex: `ros2 run frtl_2024_fase1 fase1_dummy`
+  - Ex: `ros2 run frtl_2024_fase4 fase4`
 
 ## Yolo Classifier
 
@@ -141,7 +149,7 @@ pip install ultralytics
 Depois disso, basta:
 
 ```bash
-python3 src/frtl_2024/frtl_2024_cv_utils/python_modules/yolo_classifier.py
+ros2 run frtl_2024_cv_utils yolo_classifier
 ```
 
 ## Referências

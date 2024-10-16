@@ -3,14 +3,6 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        // Simulate task
-        {
-            "label": "simulate",
-            "detail": "Launch Gazebo Simulation",
-            "type": "shell",
-            "command": "./tasks/simulate.sh ${input:camera}",
-            "problemMatcher": []
-        },
         // Agent task
         {
             "label": "agent",
@@ -42,16 +34,6 @@
     ],
     "inputs": [
         {
-            "id" : "camera",
-            "description": "Choose between simulate with or without camera.",
-            "type": "pickString",
-            "options": [
-                "\"com camera\"",
-                "\"sem camera\""
-            ],
-            "default": "com camera"
-        },
-        {
             "id" : "buildFolder",
             "description": "Which targets to build?",
             "type": "pickString",
@@ -59,8 +41,8 @@
                 "all",
                 "frtl_2024",
                 "dependencies",
-                "fsm",
-                "simulation",
+                "gesture_packages",
+                "custom_msgs",
                 "cv_utils",
                 "fase1",
                 "fase2",

@@ -61,6 +61,13 @@ else
     echo "gesture_classifier directory already exists. Skipping clone."
 fi
 
+#custom_msgs
+if [ ! -d "$SRC_DIR/custom_msgs" ]; then
+    git clone https://github.com/Equipe-eVTOL-ITA/custom_msgs.git
+else
+    echo "custom_msgs directory already exists. Skipping clone."
+fi
+
 #gesture_control
 if [ ! -d "$SRC_DIR/gesture_control" ]; then
     git clone https://github.com/Equipe-eVTOL-ITA/gesture_control.git
