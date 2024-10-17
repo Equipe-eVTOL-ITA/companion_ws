@@ -14,14 +14,14 @@ mkdir -p $SRC_DIR
 
 # px4_ros_com
 if [ ! -d "$SRC_DIR/px4_ros_com" ]; then
-    git clone --recursive https://github.com/PX4/px4_ros_com.git $SRC_DIR/px4_ros_com
+    git clone --branch release/v1.14 --recursive https://github.com/PX4/px4_ros_com.git $SRC_DIR/px4_ros_com
 else
     echo "px4_ros_com directory already exists. Skipping clone."
 fi
 
 #px4_msgs
 if [ ! -d "$SRC_DIR/px4_msgs" ]; then
-    git clone --recursive https://github.com/PX4/px4_msgs.git $SRC_DIR/px4_msgs
+    git clone --branch release/1.14 --recursive https://github.com/PX4/px4_msgs.git $SRC_DIR/px4_msgs
 else
     echo "px4_msgs directory already exists. Skipping clone."
 fi
@@ -35,7 +35,7 @@ fi
 
 #frtl_2024
 if [ ! -d "$SRC_DIR/frtl_2024" ]; then
-    git clone https://github.com/Equipe-eVTOL-ITA/frtl_2024.git $SRC_DIR/frtl_2024
+    git clone --branch dev https://github.com/Equipe-eVTOL-ITA/frtl_2024.git $SRC_DIR/frtl_2024
 else
     echo "frtl_2024 directory already exists. Skipping clone."
 fi
@@ -49,7 +49,7 @@ fi
 
 #gesture_classifier
 if [ ! -d "$SRC_DIR/gesture_classifier" ]; then
-    git clone https://github.com/Equipe-eVTOL-ITA/gesture_classifier.git $SRC_DIR/gesture_classifier
+    git clone --branch position https://github.com/Equipe-eVTOL-ITA/gesture_classifier.git $SRC_DIR/gesture_classifier
 else
     echo "gesture_classifier directory already exists. Skipping clone."
 fi
