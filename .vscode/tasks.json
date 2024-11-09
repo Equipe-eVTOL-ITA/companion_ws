@@ -31,6 +31,13 @@
             "command": "./tasks/setup.sh",
             "problemMatcher": []
         },
+        {
+            "label": "mavlink-router",
+            "detail": "Launch Mavlink Router",
+            "type": "shell",
+            "command": "./tasks/mavlink-router.sh ${input:mavlinkConfig}",
+            "problemMatcher": []
+        }
     ],
     "inputs": [
         {
@@ -50,6 +57,16 @@
                 "fase4"
             ],
             "default": "all"
+        },
+        {
+            "id": "mavlinkConfig",
+            "description": "Choose Mavlink Router configuration",
+            "type": "pickString",
+            "options": [
+                "Rasp_4",
+                "Rasp_4B"
+            ],
+            "default": "Rasp_4"
         }
     ]
 }
